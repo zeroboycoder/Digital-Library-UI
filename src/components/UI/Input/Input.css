@@ -1,0 +1,96 @@
+.Input {
+   margin: 30px 0;
+   display: flex;
+   flex-flow: column;
+}
+
+.Input__Label {
+   color: var(--text-black);
+   font: 600 16px var(--font_family);
+   margin-bottom: 15px;
+   letter-spacing: 1px;
+   word-spacing: 2px;
+}
+
+.Input input,
+textarea {
+   color: var(--primary-color);
+   font: 600 16px var(--font_family);
+   letter-spacing: 1.5px;
+   word-spacing: 2px;
+   border: 2px solid #d4d4d4;
+   box-sizing: border-box;
+   transition: all 0.3s;
+}
+
+.Input input:hover,
+.Input textarea:hover {
+   border: 2px solid #999;
+}
+
+.Input input:focus {
+   color: var(--primary-color);
+   border: 2px solid var(--primary-color);
+   box-shadow: none;
+}
+
+.Input .fileInput {
+   width: -webkit-fit-content;
+   width: -moz-fit-content;
+   width: fit-content;
+   color: var(--primary-color);
+   border: 2px solid transparent;
+   outline: none;
+}
+
+.Input .fileInput:hover,
+.Input .fileInput:focus {
+   border: 2px solid transparent;
+}
+
+.Input textarea {
+   font: 600 16px var(--font_family);
+   border: 2px solid #d4d4d4;
+   height: 180px;
+}
+
+.Input textarea:focus {
+   color: var(--primary-color);
+   font: 600 16px var(--font_family);
+   border: 2px solid var(--primary-color);
+   box-shadow: none;
+}
+
+.Input__ErrorMessage {
+   margin-top: 5px;
+   color: var(--danger);
+   font: 500 14px var(--font_family);
+   letter-spacing: 0.5px;
+}
+
+/* For Tablet */
+@media (max-width: 768px) {
+   .Input__Label {
+      margin-bottom: 10px;
+      font: 500 16px var(--font_family);
+   }
+
+   .Input input,
+   textarea {
+      font: 500 15px var(--font_family);
+   }
+
+   .Input input:focus {
+      border: 1px solid var(--primary-color);
+   }
+
+   .Input textarea {
+      border: 1px solid #867f7f;
+      font: 500 16px var(--font_family);
+   }
+
+   .Input textarea:focus {
+      border: 1px solid var(--primary-color);
+      font: 500 16px var(--font_family);
+   }
+}

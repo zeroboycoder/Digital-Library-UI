@@ -1,0 +1,52 @@
+.AddEbook {
+   font-size: 14px;
+   max-width: 1040px;
+   width: 100%;
+   margin: 70px auto 0 auto;
+   padding: 20px;
+}
+
+.AddEbook__Heading {
+   text-align: center;
+   font: 400 42px var(--font_family);
+   letter-spacing: 0.5px;
+}
+
+.SubmitBtn {
+   outline: none;
+   padding: 12px 35px;
+   font: 600 16px var(--font_family);
+   color: var(--text-black);
+   background-color: var(--secondary-color);
+   border: 1px solid #777;
+   border-radius: 4px;
+   letter-spacing: 0.5px;
+   cursor: pointer;
+   transition: all 0.3s;
+}
+
+.SubmitBtn:hover,
+.SubmitBtn:active {
+   background-color: #b6b6cf;
+}
+
+.SubmitBtn:disabled {
+   color: #999;
+   background-color: #e4e4e4;
+   border: 1px solid #ccc;
+   cursor: not-allowed;
+}
+
+/* For Tablet */
+@media (max-width: 900px) {
+   .AddEbook__Heading {
+      font-size: 36px;
+   }
+}
+
+/* For mobile */
+@media (max-width: 480px) {
+   .AddEbook__Heading {
+      font-size: 28px;
+   }
+}
