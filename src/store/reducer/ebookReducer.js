@@ -5,6 +5,7 @@ const initState = {
    searched_ebook_datas: [],
    detail_of_ebook: null,
    suggestionBooks: [],
+   comments: [],
    tags: [],
    categoryName: null,
    pagination: {},
@@ -44,6 +45,7 @@ const ebookReducer = (state = initState, action) => {
             ...state,
             detail_of_ebook: action.detail_of_ebook,
             suggestionBooks: action.suggestionBooks,
+            comments: action.comments,
             loading: false,
          };
       case actionTypes.FETCH_DETAIL_OF_EBOOK_FAIL:
@@ -106,6 +108,18 @@ const ebookReducer = (state = initState, action) => {
             ...state,
             loading: false,
             errMsg: action.errMsg,
+         };
+      /* Add Comment to specific ebook */
+      case actionTypes.ADD_COMMENT_SUCCESS:
+         return {
+            ...state,
+            comments: action.cmt,
+            loading: false,
+         };
+      case actionTypes.ADD_EBOOK_FAIL:
+         return {
+            ...state,
+            loading: false,
          };
       default:
          return state;

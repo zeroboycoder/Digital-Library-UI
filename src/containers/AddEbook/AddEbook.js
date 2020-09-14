@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./AddEbook.css";
 import Input from "../../components/UI/Input/Input";
+import { checkValidation } from "../../util/helper";
 import * as actions from "../../store/action/rootActions";
 
 class AddEbook extends Component {
@@ -137,38 +138,6 @@ class AddEbook extends Component {
       }
    };
 
-   // check validation
-   checkValidation = (value, rules) => {
-      let validResult = false;
-      if (value) {
-         // if rule has isRequired
-         if (rules.isRequired) {
-            validResult = value.trim() !== "";
-         }
-         // if rule has isNumber
-         if (rules.isNumber) {
-            const pattern = /^\d+$/;
-            validResult = pattern.test(value);
-         }
-         // if rule has number of array value
-         if (rules.numberOfArrayValue) {
-            const numberOfValue = value.trim().split(" ").length;
-            validResult = numberOfValue >= rules.numberOfArrayValue;
-         }
-         // if rule has isImage
-         if (rules.isImage) {
-            const pattern = /jpg|jpeg|png/;
-            validResult = pattern.test(value.type);
-         }
-         // if rule has isPdf
-         if (rules.ifPdf) {
-            const pattern = /.pdf/;
-            validResult = pattern.test(value.type);
-         }
-      }
-      return validResult;
-   };
-
    // Input onChange handler
    inputChangeHandler = (event, key, type, label) => {
       // check input is file or not
@@ -180,7 +149,7 @@ class AddEbook extends Component {
             const file = event.target.files[0] || null;
             const updateUploadedForm = { ...this.state.uploadedForm };
             updateUploadedForm[key].isTouch = true;
-            updateUploadedForm[key].isValid = this.checkValidation(
+            updateUploadedForm[key].isValid = checkValidation(
                file,
                this.state.uploadedForm[key].validation
             );
@@ -195,7 +164,7 @@ class AddEbook extends Component {
             const file = event.target.files[0] || null;
             const updateUploadedForm = { ...this.state.uploadedForm };
             updateUploadedForm[key].isTouch = true;
-            updateUploadedForm[key].isValid = this.checkValidation(
+            updateUploadedForm[key].isValid = checkValidation(
                file,
                this.state.uploadedForm[key].validation
             );
@@ -212,7 +181,7 @@ class AddEbook extends Component {
          const updateUploadedForm = { ...this.state.uploadedForm };
          updateUploadedForm[key].value = value;
          updateUploadedForm[key].isTouch = true;
-         updateUploadedForm[key].isValid = this.checkValidation(
+         updateUploadedForm[key].isValid = checkValidation(
             value,
             this.state.uploadedForm[key].validation
          );
@@ -233,7 +202,7 @@ class AddEbook extends Component {
       form.append("files", this.state.selectedImage);
       form.append("files", this.state.selectedPdf);
       this.props.onAddEbook(form);
-      this.props.history.replace("/")
+      this.props.history.push("/");
    };
 
    // If all input is valie, you can click upload button

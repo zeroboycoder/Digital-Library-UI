@@ -52,11 +52,12 @@ const fetchDetailOfEbookStart = () => {
    };
 };
 
-const fetchDetailOfEbookSuccess = (ebookDetail, suggestionBooks) => {
+const fetchDetailOfEbookSuccess = (ebookDetail, suggestionBooks, comments) => {
    return {
       type: actionTypes.FETCH_DETAIL_OF_EBOOK_SUCCESS,
       detail_of_ebook: ebookDetail,
       suggestionBooks: suggestionBooks,
+      comments: comments,
    };
 };
 
@@ -75,7 +76,8 @@ export const onFetchDetailOfEbook = (book_id) => (dispatch) => {
          dispatch(
             fetchDetailOfEbookSuccess(
                response.data.ebook,
-               response.data.suggestionBooks
+               response.data.suggestionBooks,
+               response.data.ebook.comments
             )
          );
       })

@@ -28,6 +28,10 @@ export const ADD_EBOOK_START = "ADD_EBOOK_START";
 export const ADD_EBOOK_SUCCESS = "ADD_EBOOK_SUCCESS";
 export const ADD_EBOOK_FAIL = "ADD_EBOOK_FAIL";
 
+// For Comment
+export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
+export const ADD_COMMENT_FAIL = "ADD_COMMENT_FAIL";
+
 // Load user
 export const LOAD_USER_START = "LOAD_USER_START";
 export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";

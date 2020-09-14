@@ -4,34 +4,29 @@ import "./EbookDetail.css";
 import * as actions from "../../store/action/rootActions";
 import SearchEbookByInputName from "../../components/SearchEbookByInputName/SearchEbookByInputName";
 import SuggestionBook from "../../components/SuggestionBook/SuggestionBook";
-import AuthInput from "../../components/UI/AuthInput/AuthInput";
+import CommentBox from "../../components/Comment/CommentBox/CommentBox";
+import { checkValidation } from "../../util/helper";
 import cover from "../../assets/ss.jpg";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 class EbookDetail extends Component {
    state = {
       params: null,
+      comments: [],
       commentForm: {
          email: {
-            elementType: "input",
-            elementConfig: {
-               type: "email",
-            },
             validation: {
                isRequired: true,
                isEmail: true,
             },
-            label: "Email",
             value: "",
             isValid: false,
             errMsg: "Email isn't valid.",
          },
          comment: {
-            elementType: "textarea",
             validation: {
                isRequired: true,
             },
-            label: "Comment",
             value: "",
             isValid: false,
             errMsg: "Comment is required.",
@@ -57,37 +52,30 @@ class EbookDetail extends Component {
       }
    }
 
-   checkValidation = (value, rules) => {
-      let valid = false;
-      if (rules.isRequired) {
-         valid = value.trim() !== "";
-      }
-
-      if (rules.isEmail) {
-         const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-         valid = pattern.test(value);
-      }
-      return valid;
-   };
-
    inputChangeHandler = (event, key) => {
       const value = event.target.value;
       const updateCommentForm = { ...this.state.commentForm };
       updateCommentForm[key].value = value;
       updateCommentForm[key].isTouch = true;
-      updateCommentForm[key].isValid = this.checkValidation(
+      updateCommentForm[key].isValid = checkValidation(
          value,
          updateCommentForm[key].validation
       );
       this.setState({ commentForm: updateCommentForm });
    };
 
-   canClickBtn = () => {
-      let canClick = false;
-      for (let key in this.state.commentForm) {
-         canClick = this.state.commentForm[key].isValid;
-      }
-      return canClick;
+   formSubmitHandler = (event) => {
+      event.preventDefault();
+      const book_id = this.props.detail_of_ebook._id;
+      const data = {
+         email: this.state.commentForm.email.value,
+         comment: this.state.commentForm.comment.value,
+      };
+      const updateCommentForm = this.state.commentForm;
+      updateCommentForm.email.value = "";
+      updateCommentForm.comment.value = "";
+      this.props.onAddComment(book_id, data);
+      this.setState({ commentForm: updateCommentForm });
    };
 
    render() {
@@ -138,31 +126,26 @@ class EbookDetail extends Component {
                }
             );
 
-            let commentInputs = [];
-            for (let key in this.state.commentForm) {
-               commentInputs.push(
-                  <AuthInput
-                     key={key}
-                     elementtype={this.state.commentForm[key].elementType}
-                     elementconfig={this.state.commentForm[key].elementConfig}
-                     label={this.state.commentForm[key].label}
-                     value={this.state.commentForm[key].value}
-                     touched={this.state.commentForm[key].isTouch}
-                     invalid={!this.state.commentForm[key].isValid}
-                     errMsg={this.state.commentForm[key].errMsg}
-                     changed={(e) => this.inputChangeHandler(e, key)}
-                  />
-               );
-            }
-
-            const commentBox = (
-               <form>
-                  {commentInputs}
-                  <div className="form-group">
-                     <button disabled={!this.canClickBtn()}>Comment</button>
+            const showComment = this.props.comments.map((commentObj) => {
+               const emailArr = commentObj.email.split("@");
+               return (
+                  <div className="EbookDetail__Comment__ShowComment">
+                     <div>
+                        <i className="fas fa-user-circle"></i>
+                        {/* <i className="far fa-user-circle"></i> */}
+                     </div>
+                     <div>
+                        <p className="EbookDetail__Comment__ShowComment__Email">
+                           {emailArr[0]}
+                           {this.props.token && <span>@{emailArr[1]}</span>}
+                        </p>
+                        <p className="EbookDetail__Comment__ShowComment__Comment">
+                           {commentObj.comment}
+                        </p>
+                     </div>
                   </div>
-               </form>
-            );
+               );
+            });
 
             ebookDetail = (
                <div className="EbookDetail">
@@ -179,11 +162,19 @@ class EbookDetail extends Component {
                   </div>
                   <div className="EbookDetail__Comment">
                      <div className="EbookDetail__Comment__Title">
-                        <h1>Comments:</h1>
+                        <h1>Comments</h1>
                      </div>
-                     <div className="EbookDetail__Comment__CommentBox">
-                        {commentBox}
-                     </div>
+                     <CommentBox
+                        commentForm={this.state.commentForm}
+                        changedEmail={(e) =>
+                           this.inputChangeHandler(e, "email")
+                        }
+                        changedComment={(e) =>
+                           this.inputChangeHandler(e, "comment")
+                        }
+                        formSubmitted={this.formSubmitHandler}
+                     />
+                     {showComment}
                   </div>
                </div>
             );
@@ -198,6 +189,8 @@ const stateToProps = (state) => {
       detail_of_ebook: state.ebook.detail_of_ebook,
       suggestionBooks: state.ebook.suggestionBooks,
       loading: state.ebook.loading,
+      comments: state.ebook.comments,
+      token: state.auth.token,
    };
 };
 
@@ -205,6 +198,8 @@ const dispatchToProps = (dispatch) => {
    return {
       onFetchDetailOfEbook: (book_id) =>
          dispatch(actions.onFetchDetailOfEbook(book_id)),
+      onAddComment: (book_id, data) =>
+         dispatch(actions.onAddComment(book_id, data)),
    };
 };
 

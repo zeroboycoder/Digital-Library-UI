@@ -7,8 +7,7 @@
    width: 100%;
 }
 
-.AuthInput__InputSection input,
-textarea {
+.AuthInput__InputSection input {
    position: relative;
    z-index: 50;
    outline: none;
