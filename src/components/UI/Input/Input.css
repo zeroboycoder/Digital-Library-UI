@@ -1,68 +1,69 @@
 .Input {
-   margin: 30px 0;
+   width: 100%;
+   margin-bottom: 20px;
    display: flex;
-   flex-flow: column;
 }
 
 .Input__Label {
-   color: var(--text-black);
-   font: 600 16px var(--font_family);
+   width: 20%;
+}
+
+.Input__InputBox {
+   width: 80%;
+   position: relative;
+}
+
+.Input__Label label {
+   color: var(--black);
+   font: 500 16px var(--font_family);
    margin-bottom: 15px;
    letter-spacing: 1px;
    word-spacing: 2px;
 }
 
 .Input input,
-textarea {
-   color: var(--primary-color);
-   font: 600 16px var(--font_family);
+.Input textarea {
+   color: var(--black);
+   font: 500 16px var(--font_family);
    letter-spacing: 1.5px;
    word-spacing: 2px;
-   border: 2px solid #d4d4d4;
-   box-sizing: border-box;
+   padding-left: 20px;
+   margin-bottom: 7px;
+   border: 1px solid #999;
+   border-radius: 20px;
+   box-shadow: 0px 1px 4px #00000080;
    transition: all 0.3s;
 }
 
-.Input input:hover,
-.Input textarea:hover {
-   border: 2px solid #999;
-}
-
-.Input input:focus {
-   color: var(--primary-color);
-   border: 2px solid var(--primary-color);
-   box-shadow: none;
+.Input__InputBox input:hover,
+.Input__InputBox input:focus,
+.Input__InputBox textarea:hover,
+.Input__InputBox textarea:focus {
+   border: 1px solid var(--gray);
+   box-shadow: 1px 2px 6px #666;
 }
 
 .Input .fileInput {
    width: -webkit-fit-content;
    width: -moz-fit-content;
    width: fit-content;
-   color: var(--primary-color);
-   border: 2px solid transparent;
+   color: var(--black);
+   border: 1px solid transparent;
+   border-radius: 0;
+   box-shadow: none;
    outline: none;
 }
 
 .Input .fileInput:hover,
 .Input .fileInput:focus {
-   border: 2px solid transparent;
+   border: 1px solid transparent;
 }
 
 .Input textarea {
-   font: 600 16px var(--font_family);
-   border: 2px solid #d4d4d4;
    height: 180px;
 }
 
-.Input textarea:focus {
-   color: var(--primary-color);
-   font: 600 16px var(--font_family);
-   border: 2px solid var(--primary-color);
-   box-shadow: none;
-}
-
 .Input__ErrorMessage {
-   margin-top: 5px;
    color: var(--danger);
    font: 500 14px var(--font_family);
    letter-spacing: 0.5px;

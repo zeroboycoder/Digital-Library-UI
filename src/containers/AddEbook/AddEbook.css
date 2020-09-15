@@ -12,6 +12,10 @@
    letter-spacing: 0.5px;
 }
 
+.AddEbook__Form {
+   border: 1px solid var(--gray);
+}
+
 .SubmitBtn {
    outline: none;
    padding: 12px 35px;

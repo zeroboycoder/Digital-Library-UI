@@ -19,28 +19,30 @@ const Input = (props) => {
    // If element type will input
    if (props.elementtype === "input") {
       input = (
-         <div className="form-group Input">
-            {props.label && (
-               <label className="Input__Label">{props.label}</label>
-            )}
-            <input
-               {...props.elementconfig}
-               value={props.value}
-               className={classes.join(" ")}
-               onChange={props.changed}
-            />
-            <small className="text-muted mt-1">{props.guideLine}</small>
-            {errMsg}
-            {props.previewImage &&
-               !props.invalid &&
-               props.label === "Book Cover" && (
-                  <img
-                     className="Input__PreviewImage"
-                     src={props.previewImage}
-                     alt="Preview Book Cover"
-                     style={{ width: "120px", marginTop: "20px" }}
-                  />
-               )}
+         <div className="Input">
+            <div className="Input__Label">
+               {props.label && <label>{props.label}</label>}
+            </div>
+            <div className="Input__InputBox">
+               <input
+                  {...props.elementconfig}
+                  value={props.value}
+                  className={classes.join(" ")}
+                  onChange={props.changed}
+               />
+               <small className="text-muted mt-1">{props.guideLine}</small>
+               {errMsg}
+               {props.previewImage &&
+                  !props.invalid &&
+                  props.label === "Book Cover" && (
+                     <img
+                        className="Input__PreviewImage"
+                        src={props.previewImage}
+                        alt="Preview Book Cover"
+                        style={{ width: "120px", marginTop: "20px" }}
+                     />
+                  )}
+            </div>
          </div>
       );
    }
@@ -48,18 +50,22 @@ const Input = (props) => {
    // If element type will textarea
    if (props.elementtype === "textarea") {
       input = (
-         <div className="form-group Input">
-            {props.label && (
-               <label className="Input__Label">{props.label}</label>
-            )}
-            <textarea
-               {...props.elementconfig}
-               className={classes.join(" ")}
-               onChange={props.changed}
-            >
-               {props.value}
-            </textarea>
-            {errMsg}
+         <div className="Input">
+            <div className="Input__Label">
+               {props.label && (
+                  <label className="Input__Label">{props.label}</label>
+               )}
+            </div>
+            <div className="Input__InputBox">
+               <textarea
+                  {...props.elementconfig}
+                  className={classes.join(" ")}
+                  onChange={props.changed}
+               >
+                  {props.value}
+               </textarea>
+               {errMsg}
+            </div>
          </div>
       );
    }

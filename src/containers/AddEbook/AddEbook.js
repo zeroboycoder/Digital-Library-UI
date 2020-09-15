@@ -255,7 +255,7 @@ class AddEbook extends Component {
       return (
          <div className="AddEbook">
             <h1 className="AddEbook__Heading">Which Book U Wanna Share</h1>
-            {form}
+            <div className="AddEbook__Form">{form}</div>
          </div>
       );
    }
