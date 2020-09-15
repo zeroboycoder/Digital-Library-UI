@@ -23,15 +23,19 @@
    background-repeat: no-repeat;
 }
 
+.AddEbook__Btn {
+   text-align: right;
+}
+
 .SubmitBtn {
    outline: none;
    padding: 12px 35px;
-   font: 600 16px var(--font_family);
-   color: var(--text-black);
-   background-color: var(--secondary-color);
-   border: 1px solid #777;
-   border-radius: 4px;
    letter-spacing: 0.5px;
+   font: 500 17px var(--font_family);
+   color: var(---black);
+   background-color: #5a64f1;
+   border: 1px solid #777;
+   border-radius: 25px;
    cursor: pointer;
    transition: all 0.3s;
 }

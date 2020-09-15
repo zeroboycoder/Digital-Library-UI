@@ -243,13 +243,15 @@ class AddEbook extends Component {
       const form = (
          <form onSubmit={(e) => this.submitHandler(e)}>
             {inputs}
-            <button
-               type="submit"
-               className="SubmitBtn"
-               disabled={!this.canClickBtn()}
-            >
-               Upload
-            </button>
+            <div className="AddEbook__Btn">
+               <button
+                  type="submit"
+                  className="SubmitBtn"
+                  disabled={!this.canClickBtn()}
+               >
+                  Upload
+               </button>
+            </div>
          </form>
       );
       return (

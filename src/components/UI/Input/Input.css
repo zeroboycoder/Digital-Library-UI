@@ -1,6 +1,6 @@
 .Input {
    width: 100%;
-   margin-bottom: 20px;
+   margin-bottom: 25px;
    display: flex;
 }
 
@@ -21,8 +21,8 @@
    word-spacing: 2px;
 }
 
-.Input input,
-.Input textarea {
+.Input__InputBox input,
+.Input__InputBox textarea {
    color: var(--black);
    font: 500 16px var(--font_family);
    letter-spacing: 1.5px;
@@ -59,7 +59,7 @@
    border: 1px solid transparent;
 }
 
-.Input textarea {
+.Input__InputBox textarea {
    height: 180px;
 }
 

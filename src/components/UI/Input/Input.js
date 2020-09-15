@@ -30,7 +30,7 @@ const Input = (props) => {
                   className={classes.join(" ")}
                   onChange={props.changed}
                />
-               <small className="text-muted mt-1">{props.guideLine}</small>
+               <small className="mt-1">{props.guideLine}</small>
                {errMsg}
                {props.previewImage &&
                   !props.invalid &&
